@@ -2,7 +2,7 @@
   "applinks": {
     "details": [
       {
-        "appIDs": ["__APPLE_TEAM_ID__.__IOS_BUNDLE_ID__"],
+        "appIDs": ["Y973CM2352.com.theonebytwo.app"],
         "components": [
           { "/": "/oauth/google", "comment": "Google sign-in redirect for YouTube and Gmail" },
           { "/": "/oauth/google/", "comment": "Same, with the trailing slash GitHub Pages adds" }
