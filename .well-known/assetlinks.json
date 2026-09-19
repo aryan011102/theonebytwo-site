@@ -3,10 +3,9 @@
     "relation": ["delegate_permission/common.handle_all_urls"],
     "target": {
       "namespace": "android_app",
-      "package_name": "__ANDROID_PACKAGE_NAME__",
+      "package_name": "com.theonebytwo.app",
       "sha256_cert_fingerprints": [
-        "__RELEASE_SHA256_FINGERPRINT__",
-        "__DEBUG_SHA256_FINGERPRINT__"
+        "6E:FF:F9:B8:D0:FA:8F:C2:FB:A3:D6:95:99:52:15:63:9D:55:64:4F:DC:BB:64:17:94:AA:76:0D:30:F7:E0:66"
       ]
     }
   }

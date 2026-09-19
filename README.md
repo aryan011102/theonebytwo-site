@@ -13,4 +13,4 @@ The public website at https://theonebytwo.com, served by GitHub Pages from this 
 - `.nojekyll`: without it GitHub Pages silently skips the `.well-known` folder.
 - `CNAME`: the custom domain.
 
-Placeholders still to fill: the four in `.well-known`. Contact address on every page: pritika@theonebytwo.com.
+Placeholders still to fill: the Apple Team ID and bundle id in `apple-app-site-association`. `assetlinks.json` holds the debug key of the build PC; add the release (Play App Signing) fingerprint when there is one. Contact address on every page: pritika@theonebytwo.com.
