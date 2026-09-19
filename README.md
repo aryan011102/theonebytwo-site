@@ -13,4 +13,4 @@ The public website at https://theonebytwo.com, served by GitHub Pages from this 
 - `.nojekyll`: without it GitHub Pages silently skips the `.well-known` folder.
 - `CNAME`: the custom domain.
 
-Placeholders still to fill: `__CONTACT_EMAIL__` in every page, and the four in `.well-known`.
+Placeholders still to fill: `pritika@theonebytwo.com` in every page, and the four in `.well-known`.
