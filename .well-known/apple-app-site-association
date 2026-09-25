@@ -5,7 +5,9 @@
         "appIDs": ["Y973CM2352.com.theonebytwo.app"],
         "components": [
           { "/": "/oauth/google", "comment": "Google sign-in redirect for YouTube and Gmail" },
-          { "/": "/oauth/google/", "comment": "Same, with the trailing slash GitHub Pages adds" }
+          { "/": "/oauth/google/", "comment": "Same, with the trailing slash GitHub Pages adds" },
+          { "/": "/oauth/digilocker", "comment": "DigiLocker sign-in redirect for verification" },
+          { "/": "/oauth/digilocker/", "comment": "Same, with the trailing slash GitHub Pages adds" }
         ]
       }
     ]
