@@ -100,6 +100,159 @@
     measure();
   }
 
+  // The waitlist: a wall of everyone who joined, newest first, and the form over it.
+  // Tiles take the app's shapes and colours, picked by place number, so a tile
+  // looks the same for everyone. Empty slots are plain tiles, never made-up names.
+  const fold = document.querySelector('[data-waitlist]');
+  if (fold) {
+    const local = ['localhost', '127.0.0.1'].includes(location.hostname);
+    const api = (local && new URLSearchParams(location.search).get('api')) || fold.dataset.api;
+    const wallEl = fold.querySelector('.wall');
+    const countEl = fold.querySelector('.wl-count');
+    const form = fold.querySelector('.wl-form');
+    const errorEl = form.querySelector('.wl-error');
+    const button = form.querySelector('.wl-submit');
+    const SHAPES = ['big', 'half', 'tall', 'wide', 'half', 'half', 'wide', 'tall'];
+    const COLORS = [
+      'linear-gradient(160deg,#9b4487,#4a1d42)',
+      'linear-gradient(160deg,#2c8479,#0b3f3a)',
+      'linear-gradient(160deg,#c9812b,#7a3a04)',
+      'linear-gradient(160deg,#5b49a8,#241a4c)',
+      'linear-gradient(160deg,#c24e66,#6e162c)',
+      'linear-gradient(165deg,#3f8a49,#1d4424)',
+      'linear-gradient(160deg,#7b4a30,#3b2117)',
+      'linear-gradient(160deg,#d4483a,#8a2318)',
+    ];
+    const SLOTS = 40;
+    const seen = new Set();
+    let shown = [];
+    let mine = null;
+    let drawn = false;
+
+    const tile = (entry, n) => {
+      const el = document.createElement('div');
+      el.className = `wtile ${SHAPES[n % SHAPES.length]}`;
+      el.style.setProperty('--bg', COLORS[(n * 3) % COLORS.length]);
+      if (!entry) {
+        el.classList.add('blank');
+        return el;
+      }
+      const name = document.createElement('b');
+      name.textContent = entry.name;
+      const place = document.createElement('span');
+      place.textContent = `Waitlisted at #${entry.position}`;
+      el.append(name, place);
+      if (drawn && !seen.has(entry.position) && !still) el.classList.add('fresh');
+      if (entry.position === mine) el.classList.add('mine');
+      return el;
+    };
+
+    const draw = () => {
+      const tiles = shown.map((entry) => tile(entry, entry.position));
+      for (let i = shown.length; i < SLOTS; i += 1) tiles.push(tile(null, i));
+      wallEl.replaceChildren(...tiles);
+      shown.forEach((entry) => seen.add(entry.position));
+      drawn = true;
+    };
+
+    const load = async () => {
+      try {
+        const res = await fetch(`${api}/api/v1/waitlist/wall`, { cache: 'no-store' });
+        if (!res.ok) return;
+        const data = await res.json();
+        const changed = data.entries.map((e) => e.position).join() !== shown.map((e) => e.position).join();
+        shown = data.entries;
+        if (changed) draw();
+        if (data.total > 0) {
+          const people = data.total === 1 ? 'person has' : 'people have';
+          countEl.textContent = `${data.total.toLocaleString('en-IN')} ${people} joined`;
+          countEl.hidden = false;
+        }
+      } catch {
+        // Offline or the server is away: the wall of plain tiles stays.
+      }
+    };
+
+    draw();
+    // New joiners appear for everyone while the fold is near the screen; a tab in
+    // the background asks nothing.
+    const near = () => {
+      const r = fold.getBoundingClientRect();
+      return r.top < innerHeight + 300 && r.bottom > -300;
+    };
+    new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) load();
+    }, { rootMargin: '300px 0px' }).observe(fold);
+    if (near()) load();
+    setInterval(() => {
+      if (!document.hidden && near()) load();
+    }, 5000);
+
+    const fail = (message, field) => {
+      errorEl.textContent = message;
+      errorEl.hidden = false;
+      form.querySelectorAll('[aria-invalid]').forEach((el) => el.removeAttribute('aria-invalid'));
+      if (field) {
+        field.setAttribute('aria-invalid', 'true');
+        field.focus();
+      }
+    };
+
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      errorEl.hidden = true;
+      const f = form.elements;
+      const name = f.full_name.value.trim();
+      const age = Number(f.age.value);
+      const email = f.email.value.trim();
+      let code = f.code.value.trim();
+      if (code && !code.startsWith('+')) code = `+${code}`;
+      if (!name) return fail('Tell us your name.', f.full_name);
+      if (!Number.isInteger(age) || age < 18) return fail('You need to be 18 or older to join.', f.age);
+      if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) return fail('That email address does not look right.', f.email);
+      if (!/^\+\d{1,4}$/.test(code)) return fail('Add your country code, like +91.', f.code);
+      if (f.phone.value.replace(/\D/g, '').length < 6) return fail('That phone number does not look right.', f.phone);
+
+      button.disabled = true;
+      button.textContent = 'Joining…';
+      try {
+        const res = await fetch(`${api}/api/v1/waitlist`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            full_name: name,
+            age,
+            email,
+            phone: `${code}${f.phone.value}`,
+            company: f.company.value,
+          }),
+        });
+        const data = await res.json().catch(() => ({}));
+        if (!res.ok) return fail(data?.error?.message || 'Something went wrong. Try again.');
+        mine = data.position;
+        if (!shown.some((entry) => entry.position === mine)) {
+          shown = [{ position: data.position, name: data.name }, ...shown].slice(0, SLOTS);
+        }
+        draw();
+        fold.querySelector('.wl-done-number b').textContent = data.position;
+        fold.querySelector('.wl-done-kicker').textContent = data.already
+          ? 'You’re already on the waitlist'
+          : 'You’re on the waitlist';
+        fold.querySelector('.wl-form-view').hidden = true;
+        const done = fold.querySelector('.wl-done-view');
+        done.hidden = false;
+        done.tabIndex = -1;
+        done.focus();
+      } catch {
+        fail('We could not reach the waitlist. Check your connection and try again.');
+      } finally {
+        button.disabled = false;
+        button.textContent = 'Join the waitlist';
+      }
+      return undefined;
+    });
+  }
+
   // Floating tiles lean away from the pointer, on devices that have one.
   if (!still && matchMedia('(pointer: fine)').matches) {
     document.querySelectorAll('[data-parallax]').forEach((field) => {
