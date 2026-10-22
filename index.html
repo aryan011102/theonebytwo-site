@@ -59,23 +59,18 @@
 <header class="nav">
   <div class="wrap">
     <a href="/" class="brand"><img src="/logo.png" alt="" width="32" height="32">onebytwo</a>
-    <a class="btn btn-sm" href="mailto:pritika@theonebytwo.com?subject=Early%20access%20to%20onebytwo">Join the waitlist</a>
+    <a class="btn btn-sm" href="#waitlist">Join the waitlist</a>
   </div>
 </header>
 
 <main>
 
-  <!-- 1. Get real insights -->
+  <!-- 1. The tagline, then the tiles -->
   <section class="hero dark" data-reveal data-parallax>
     <div class="wrap grid">
       <div class="copy">
-        <p class="eyebrow rv"><span class="dot"></span>Date-to-marry · Launching soon in Delhi NCR</p>
+        <p class="eyebrow rv"><span class="dot"></span>Date-to-marry app · Launching soon</p>
         <h1 class="tagline rv">onebytwo: world’s first data-led blind dating app</h1>
-        <p class="lead rv" style="--rd:.08s">onebytwo is for people who’d rather be known by what they listen to, watch and order at 1am than by a form full of prompts that only test their ability to write, or prompt AI to write.</p>
-        <div class="cta-row rv" style="--rd:.18s">
-          <a class="btn" href="mailto:pritika@theonebytwo.com?subject=Early%20access%20to%20onebytwo">Join the waitlist</a>
-          <a class="btn btn-ghost" href="#apps">See how it works</a>
-        </div>
       </div>
 
       <div class="hero-art">
@@ -122,7 +117,18 @@
         <div class="fl" style="--x:2%;--y:2.5%;--z:1.5;--r:-3deg;--i:8"><div class="fl-in"><span class="pill"><svg class="ico"><use href="#i-chart"/></svg>Data-led</span></div></div>
       </div>
       <p class="sub rv" style="--rd:.3s">Connect your accounts one-time and then let our AI do its thing. Customise your profile and show it off!</p>
+      <div class="cta-row rv" style="--rd:.38s">
+        <a class="btn" href="#waitlist">Join the waitlist</a>
+        <a class="btn btn-ghost" href="#apps">See how it works</a>
       </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 1b. Who it is for, on a fold of its own -->
+  <section class="intro black" data-reveal>
+    <div class="wrap">
+      <p class="intro-text rv"><b>onebytwo</b> is for people who’d rather be known by what they listen to, watch and order at 1am than by a form full of prompts that only test their ability to write, or prompt AI to write.</p>
     </div>
   </section>
 
@@ -438,14 +444,50 @@
     </div>
   </section>
 
-  <section class="closing dark" data-reveal>
-    <div class="wrap">
-      <img class="rv" src="/logo.png" alt="onebytwo logo" width="84" height="84">
-      <h2 class="display rv">Be one of the <mark>first</mark></h2>
-      <p class="sub rv" style="--rd:.1s">All we want is for you to find someone you can place an order for a onebytwo portion of soup, momos, or maggi with :)</p>
-      <div class="cta-row rv" style="--rd:.18s">
-        <a class="btn" href="mailto:pritika@theonebytwo.com?subject=Early%20access%20to%20onebytwo">Join the waitlist</a>
-        <a class="btn btn-ghost" href="mailto:pritika@theonebytwo.com">Contact the team</a>
+  <!-- 11. The waitlist: a wall of everyone who joined, and the form on glass over it.
+       data-api is the backend; on localhost ?api= points it at a local one. -->
+  <section class="waitlist" id="waitlist" data-reveal data-waitlist data-api="https://api-production-6cf44.up.railway.app">
+    <div class="wall" aria-hidden="true"></div>
+
+    <div class="glass-card rv">
+      <div class="wl-form-view">
+        <h2 class="display">Be one of the <mark>firsts</mark></h2>
+        <p class="wl-sub">All we want is for you to find someone you can place an order for a onebytwo portion of soup, momos, or maggi with :)</p>
+        <p class="wl-count" hidden></p>
+        <form class="wl-form" novalidate>
+          <label class="field">
+            <span>Full name</span>
+            <input name="full_name" type="text" autocomplete="name" maxlength="80" required>
+          </label>
+          <label class="field field-age">
+            <span>Age</span>
+            <input name="age" type="number" inputmode="numeric" min="18" max="100" required>
+          </label>
+          <label class="field">
+            <span>Email</span>
+            <input name="email" type="email" autocomplete="email" maxlength="254" required>
+          </label>
+          <div class="field">
+            <label for="wl-phone">Phone number</label>
+            <div class="phone-row">
+              <input name="code" type="text" inputmode="tel" autocomplete="tel-country-code" maxlength="5" value="+91" aria-label="Country code">
+              <input id="wl-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel-national" maxlength="20" required>
+            </div>
+          </div>
+          <!-- People never see this field; a bot filling every box does. -->
+          <div class="wl-trap" aria-hidden="true">
+            <label>Company <input name="company" type="text" tabindex="-1" autocomplete="off"></label>
+          </div>
+          <button class="btn wl-submit" type="submit">Join the waitlist</button>
+          <p class="wl-note">Your first name and surname initial will appear on the wall. We use your details only to tell you when you can join (<a href="/privacy">privacy</a>).</p>
+          <p class="wl-error" role="alert" hidden></p>
+        </form>
+      </div>
+
+      <div class="wl-done-view" hidden>
+        <p class="wl-done-kicker">You’re on the waitlist</p>
+        <p class="wl-done-number"><span>#</span><b></b></p>
+        <p class="wl-done-text">That’s your tile on the wall. We’ll write to you the moment you can join.</p>
       </div>
     </div>
   </section>
