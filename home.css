@@ -63,6 +63,10 @@ a:focus-visible { outline: 2px solid var(--pink); outline-offset: 3px; border-ra
 .btn-ghost { background: rgba(255, 255, 255, 0.06); box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.18); }
 .btn-ghost:hover { background: rgba(255, 255, 255, 0.12); }
 .cta-row { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
+/* Phones: the hero's buttons come after the tiles, side by side. */
+.cta-desktop { display: none; }
+.cta-mobile { flex-wrap: nowrap; gap: 10px; }
+.cta-mobile .btn { flex: 1 1 0; min-width: 0; padding: 0 12px; font-size: clamp(14px, 3.9vw, 16px); white-space: nowrap; }
 
 /* ---------- Type ---------- */
 
@@ -675,6 +679,8 @@ a.fl:hover .pill { background: #343437; }
   .hero { padding: 72px 0 88px; }
   .hero .grid { grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr); }
   .hero .grid { align-items: center; gap: 72px; }
+  .cta-desktop { display: flex; margin-top: 34px; }
+  .cta-mobile { display: none; }
   .hero-art { width: 100%; max-width: 600px; justify-self: end; }
   .collage { margin: 0; }
   .tagline { font-size: clamp(72px, 6.6vw, 112px); }
