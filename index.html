@@ -257,14 +257,58 @@
         <h2 class="display rv">Explore <mark>blind dating</mark></h2>
         <p class="sub rv" style="--rd:.1s">with our <b class="plum">blind</b> mode that shuffles tiles of random people</p>
       </div>
-      <div class="visual crop rv" style="--rd:.15s" aria-hidden="true">
+      <div class="visual crop rv" style="--rd:.15s;--show:2.25" aria-hidden="true">
         <div class="phone">
-          <div class="screen"><img class="shot" src="/img/screen-blind.jpg" alt=""></div>
+          <!-- Blind mode: one block of 28 different tiles (the app's lattice, five
+               columns by eight rows). home.js tiles copies of it and the plane drifts
+               forever; the screen is smaller than a block, so no tile shows twice. -->
+          <div class="screen scr-blind">
+            <div class="bl-plane"><div class="bl-block">
+              <div class="bs w" style="--c:0;--r:0;--g:#33395C,#12172A"><span class="bb">🍜</span><b>3:12 AM</b><span>Latest biryani order of the year. A Tuesday.</span></div>
+              <div class="bs" style="--c:2;--r:0;--g:#2C8479,#0B3F3A"><span class="bb">✈️</span><b>Ziro</b><span>A festival in a valley, three years running.</span></div>
+              <div class="bs w q" style="--c:3;--r:0;--g:#C9812B,#7A3A04"><span class="bb">🏠</span><em>Sunday morning at home looks like</em><b>Dosa batter from Saturday, the radio on, nobody talking till ten.</b></div>
+              <div class="bs" style="--c:0;--r:1;--g:#D14A34,#851C15"><span class="bb">🍜</span><b>62%</b><span>From one kitchen. Loyalty, or laziness.</span></div>
+              <div class="bs t" style="--c:1;--r:1;--g:#A8508F,#4E1F42"><span class="bb">🎧</span><b>Kasoor</b><span>Prateek Kuhad · 214 plays, more than any other track</span></div>
+              <div class="bs" style="--c:2;--r:1;--g:#2E71B4,#0D3760"><span class="bb">✈️</span><b>Coorg</b><span>The one place returned to three years running.</span></div>
+              <div class="bs" style="--c:3;--r:1;--g:#C24E66,#6E162C"><span class="bb">🍜</span><b>17</b><span>Desserts ordered alone, at night.</span></div>
+              <div class="bs" style="--c:4;--r:1;--g:#5B49A8,#241A4C"><span class="bb">🎧</span><b>41,203</b><span>Minutes this year. Six full days of it.</span></div>
+              <div class="bs" style="--c:0;--r:2;--g:#4A8248,#12331A"><span class="bb">✈️</span><b>11</b><span>Trips this year. Six states, no repeats but one.</span></div>
+              <div class="bs w" style="--c:2;--r:2;--g:#7A5340,#2C1A12"><span class="bb">🍜</span><b>9 Tuesdays</b><span>In a row. Same paneer roll, same place, 8:40 PM.</span></div>
+              <div class="bs" style="--c:4;--r:2;--g:#A8508F,#4E1F42"><span class="bb">🎟️</span><b>4</b><span>Stand-up shows this year. Front row twice.</span></div>
+              <div class="bs w q" style="--c:0;--r:3;--g:#2C8479,#0B3F3A"><span class="bb">🛍️</span><em>The purchase still being defended</em><b>An espresso machine that gets used exactly once a week.</b></div>
+              <div class="bs" style="--c:2;--r:3;--g:#5B49A8,#241A4C"><span class="bb">🎟️</span><b>9</b><span>Live gigs this year. Six standing, three seated.</span></div>
+              <div class="bs t q" style="--c:3;--r:3;--g:#C24E66,#6E162C"><span class="bb">🛍️</span><em>Most used thing bought this year</em><b>A ₹600 kettle. It has outlived two phones.</b></div>
+              <div class="bs" style="--c:4;--r:3;--g:#7C8B41,#2A3212"><span class="bb">🍜</span><b>₹184</b><span>Average order. Mostly for one.</span></div>
+              <div class="bs" style="--c:0;--r:4;--g:#33395C,#12172A"><span class="bb">🎬</span><b>Dark</b><span>Watched start to finish twice. Still confused.</span></div>
+              <div class="bs w" style="--c:1;--r:4;--g:#4A8248,#12331A"><span class="bb">🏃</span><b>6:10 AM</b><span>Usual start of a run. Even in December.</span></div>
+              <div class="bs" style="--c:4;--r:4;--g:#C9812B,#7A3A04"><span class="bb">🍜</span><b>312</b><span>Orders this year. Two hundred of them after 9 PM.</span></div>
+              <div class="bs w" style="--c:0;--r:5;--g:#5F6874,#2A2F36"><span class="bb">✈️</span><b>43 days</b><span>Average booked ahead. Rarely last-minute.</span></div>
+              <div class="bs w q" style="--c:2;--r:5;--g:#7C8B41,#2A3212"><span class="bb">🤖</span><em>Asked ChatGPT this week</em><b>Whether a cactus can be overwatered. It can.</b></div>
+              <div class="bs" style="--c:4;--r:5;--g:#D14A34,#851C15"><span class="bb">📺</span><b>64</b><span>Channels subscribed. Forty of them about food.</span></div>
+              <div class="bs" style="--c:0;--r:6;--g:#2E71B4,#0D3760"><span class="bb">🏃</span><b>142</b><span>Workouts. Only eleven of them indoors.</span></div>
+              <div class="bs t q" style="--c:1;--r:6;--g:#5B49A8,#241A4C"><span class="bb">🏠</span><em>The chore happily taken</em><b>Ironing. With a podcast it is the best hour of the week.</b></div>
+              <div class="bs" style="--c:2;--r:6;--g:#2C8479,#0B3F3A"><span class="bb">🎧</span><b>9</b><span>Genres in one week. Ghazals next to techno.</span></div>
+              <div class="bs w" style="--c:3;--r:6;--g:#5F6874,#2A2F36"><span class="bb">🎧</span><b>3:07 AM</b><span>Longest listening session ended here.</span></div>
+              <div class="bs" style="--c:0;--r:7;--g:#5F6874,#2A2F36"><span class="bb">📺</span><b>48 min</b><span>Longest video watched to the end. Knife sharpening.</span></div>
+              <div class="bs w" style="--c:2;--r:7;--g:#7C8B41,#2A3212"><span class="bb">🏃</span><b>1,204 km</b><span>This year. Mostly the same loop.</span></div>
+              <div class="bs" style="--c:4;--r:7;--g:#5B49A8,#241A4C"><span class="bb">📺</span><b>12</b><span>Films in a cinema this year.</span></div>
+            </div></div>
+            <div class="bl-fade bl-fade-top"></div>
+            <div class="bl-fade bl-fade-bottom"></div>
+            <div class="status"><b>9:41</b><svg class="icf sb" viewBox="0 0 68 12"><use href="#i-status"/></svg></div>
+            <div class="bl-chips"><span class="on">✦ All</span><span>🍜 Food delivery</span><span>🎟️ Going out</span><span>🛍️ Shopping</span><span>✈️ Travel</span></div>
+            <span class="shuf"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 3h5v5"/><path d="M4 20 21 3"/><path d="M21 16v5h-5"/><path d="m15 15 6 6"/><path d="M4 4l5 5"/></svg></span>
+            <div class="bl-tabs">
+              <span class="on"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M10 2.5l1.9 5.3 5.3 1.9-5.3 1.9L10 16.9l-1.9-5.3-5.3-1.9 5.3-1.9L10 2.5Z"/><path d="M18.5 13l.95 2.55L22 16.5l-2.55.95L18.5 20l-.95-2.55L15 16.5l2.55-.95L18.5 13Z"/><path d="M18 2.5l.6 1.4 1.4.6-1.4.6-.6 1.4-.6-1.4-1.4-.6 1.4-.6.6-1.4Z"/></svg>Blind</span>
+              <span><svg viewBox="0 0 24 24" fill="currentColor"><path d="M4 4h12a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2H8l-4 3.5V6a2 2 0 0 1 2-2Z" opacity=".95"/><path d="M20 8h.2A1.8 1.8 0 0 1 22 9.8V21l-3.2-2.8H10a2 2 0 0 1-2-2V16h9a3 3 0 0 0 3-3V8Z" opacity=".6"/></svg>Chats</span>
+              <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9.2"/><circle cx="12" cy="10" r="3.2"/><path d="M6.2 18.4c1.3-2 3.4-3.1 5.8-3.1s4.5 1.1 5.8 3.1"/></svg>You</span>
+            </div>
+            <i class="bl-home"></i>
+          </div>
           <div class="overlay">
             <span class="who" style="--wx:85%;--wy:16.5%;--i:0">Ananya</span>
             <span class="who" style="--wx:-8%;--wy:40%;--i:1">Rahul</span>
             <span class="who" style="--wx:86%;--wy:69%;--i:2">Kritika</span>
-            <span class="shuf"><svg class="ico"><use href="#i-shuffle"/></svg></span>
           </div>
         </div>
       </div>

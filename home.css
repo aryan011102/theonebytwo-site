@@ -399,20 +399,115 @@ a.fl:hover .pill { background: #343437; }
 .js [data-reveal]:not(.in) .who { scale: 0; }
 .in .who { animation: bob 3s ease-in-out calc(var(--i) * -1s) infinite alternate; }
 .shuffling .who { scale: 0.4; opacity: 0; }
+/* Blind mode, as the app draws it (sizes from the 393 pt screen, in cqw): the
+   lattice is two columns of 174 pt cells, 12 pt apart, under a strip of glass
+   category chips, with a glass tab bar and the shuffle button over it. */
+.scr-blind {
+  --cell: 44.4cqw;
+  --gap: 3.05cqw;
+  --step: calc(var(--cell) + var(--gap));
+  --bw: calc(5 * var(--step));
+  --bh: calc(8 * var(--step));
+}
+.bl-plane {
+  position: absolute;
+  left: calc(4.07cqw - 2 * var(--step) + 5.1cqw);
+  top: 30cqw;
+  width: calc(2 * var(--bw));
+  height: calc(2 * var(--bh));
+}
+.bl-block { position: absolute; left: 0; top: 0; width: var(--bw); height: var(--bh); }
+.bl-block:nth-child(2) { left: var(--bw); }
+.bl-block:nth-child(3) { top: var(--bh); }
+.bl-block:nth-child(4) { left: var(--bw); top: var(--bh); }
+/* The drift: one block across and one down, then the same picture again. */
+.in .bl-plane.looping { animation: bl-drift 70s linear infinite; }
+@keyframes bl-drift { to { translate: calc(-1 * var(--bw)) calc(-1 * var(--bh)); } }
+
+.bs {
+  position: absolute;
+  left: calc(var(--c) * var(--step));
+  top: calc(var(--r) * var(--step));
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  width: var(--cell);
+  height: var(--cell);
+  padding: 3.56cqw;
+  overflow: hidden;
+  border-radius: 5.1cqw;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: linear-gradient(160deg, var(--g));
+  box-shadow: 0 2cqw 6cqw rgba(0, 0, 0, 0.7);
+}
+.bs.w { width: calc(2 * var(--cell) + var(--gap)); }
+.bs.t { height: calc(2 * var(--cell) + var(--gap)); }
+.bs::before { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0, 0, 0, 0) 42%, rgba(0, 0, 0, 0.28)); }
+.bs > * { position: relative; }
+.bs .bb { position: absolute; top: 2.5cqw; left: 2.5cqw; display: grid; place-items: center; width: 7.1cqw; height: 7.1cqw; border-radius: 50%; background: rgba(0, 0, 0, 0.28); font-size: 3.4cqw; }
+.bs b { font-size: 8.1cqw; font-weight: 700; line-height: 1.02; letter-spacing: -0.28cqw; }
+.bs.w b { font-size: 9.7cqw; }
+.bs span:not(.bb) { margin-top: 1.5cqw; color: rgba(255, 255, 255, 0.82); font-size: 3.44cqw; line-height: 1.32; }
+.bs.q em { color: rgba(255, 255, 255, 0.66); font-size: 2.8cqw; font-style: normal; font-weight: 700; letter-spacing: 0.18cqw; line-height: 1.3; text-transform: uppercase; }
+.bs.q b { margin-top: 1.3cqw; font-size: 4.33cqw; font-weight: 600; line-height: 1.3; letter-spacing: -0.05cqw; }
+
+.bl-fade { position: absolute; left: 0; right: 0; pointer-events: none; }
+.bl-fade-top { top: 0; height: 35cqw; background: linear-gradient(#000 40%, rgba(0, 0, 0, 0)); }
+.bl-fade-bottom { bottom: 0; height: 46cqw; background: linear-gradient(0deg, #000 40%, rgba(0, 0, 0, 0)); }
+.scr-blind .status { position: relative; }
+.bl-chips { position: absolute; left: 0; right: 0; top: 13.7cqw; display: flex; gap: 2cqw; padding: 2.5cqw 4.07cqw; overflow: hidden; }
+.bl-chips span {
+  flex: none;
+  display: flex;
+  align-items: center;
+  height: 9.2cqw;
+  padding: 0 3.56cqw;
+  border-radius: 99px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(28, 28, 30, 0.76);
+  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
+  font-size: 3.69cqw;
+  font-weight: 500;
+  white-space: nowrap;
+}
+.bl-chips .on { border-color: transparent; background: var(--plum); font-weight: 600; }
 .shuf {
   position: absolute;
-  left: 80.6%;
-  top: 78.9%;
+  right: 4.07cqw;
+  bottom: 31cqw;
   display: grid;
   place-items: center;
-  width: 12.4cqw;
-  height: 12.4cqw;
+  width: 12.7cqw;
+  height: 12.7cqw;
   border-radius: 50%;
-  background: #232325;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(28, 28, 30, 0.76);
+  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
   color: var(--pink);
   transition: rotate 0.5s cubic-bezier(0.3, 1.4, 0.5, 1);
 }
-.shuf svg { width: 6cqw; height: 6cqw; }
+.shuf svg { width: 5.6cqw; height: 5.6cqw; }
+.bl-tabs {
+  position: absolute;
+  left: 6.1cqw;
+  right: 6.1cqw;
+  bottom: 8.65cqw;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  height: 16.3cqw;
+  padding: 1.5cqw;
+  border-radius: 8.15cqw;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(28, 28, 30, 0.66);
+  -webkit-backdrop-filter: blur(24px) saturate(1.4);
+  backdrop-filter: blur(24px) saturate(1.4);
+}
+.bl-tabs span { display: grid; justify-items: center; align-content: center; gap: 1cqw; border-radius: 6.6cqw; color: rgba(235, 235, 245, 0.55); font-size: 2.67cqw; font-weight: 600; }
+.bl-tabs svg { width: 6.36cqw; height: 6.36cqw; }
+.bl-tabs .on { background: rgba(255, 255, 255, 0.07); color: var(--pink); }
+.bl-home { position: absolute; left: 50%; bottom: 2cqw; width: 35.6cqw; height: 1.27cqw; margin-left: -17.8cqw; border-radius: 99px; background: #fff; }
 
 /* ---------- Swipe right ---------- */
 
