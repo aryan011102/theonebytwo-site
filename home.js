@@ -40,6 +40,14 @@
   }, { threshold: 0.2 });
   document.querySelectorAll('[data-reveal]').forEach((el) => seen.observe(el));
 
+  // Blind mode's tiles: the page has one block; three copies make a 2 × 2 plane,
+  // so it can drift one block across and one down and start again unseen.
+  document.querySelectorAll('.bl-plane').forEach((plane) => {
+    const block = plane.querySelector('.bl-block');
+    for (let i = 0; i < 3; i += 1) plane.append(block.cloneNode(true));
+    plane.classList.add('looping');
+  });
+
   // Blind mode: every few seconds the floating names swap for new people.
   const blind = document.querySelector('[data-shuffle]');
   if (blind && !still) {
