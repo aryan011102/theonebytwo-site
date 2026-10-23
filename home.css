@@ -659,8 +659,11 @@ a.fl:hover .pill { background: #343437; }
   position: absolute;
   inset: 0;
   display: grid;
+  /* One square cell of the grid. Tiles size their inset and text from it, not
+     from their own width, so a wide tile's words line up with its neighbours'. */
+  --cell: calc((100cqw - (var(--cols) + 1) * var(--gap)) / var(--cols));
   grid-template-columns: repeat(var(--cols), minmax(0, 1fr));
-  grid-auto-rows: calc((100cqw - (var(--cols) - 1) * var(--gap) - 2 * var(--gap)) / var(--cols));
+  grid-auto-rows: var(--cell);
   grid-auto-flow: dense;
   gap: var(--gap);
   padding: var(--gap);
@@ -680,21 +683,18 @@ a.fl:hover .pill { background: #343437; }
   flex-direction: column;
   justify-content: flex-end;
   min-width: 0;
-  padding: 9%;
+  padding: calc(var(--cell) * 0.12);
   overflow: hidden;
   border-radius: clamp(14px, 3vw, 22px);
   border: 1px solid rgba(255, 255, 255, 0.1);
   background: var(--bg);
   color: #fff;
-  container-type: inline-size;
 }
 .wtile.big { grid-column: span 2; grid-row: span 2; }
 .wtile.tall { grid-row: span 2; }
 .wtile.wide { grid-column: span 2; }
-.wtile b { font-size: clamp(13px, 15cqw, 34px); font-weight: 700; letter-spacing: -0.03em; line-height: 1.05; overflow-wrap: anywhere; }
-.wtile span { margin-top: 0.35em; font-size: clamp(10px, 8.5cqw, 15px); opacity: 0.85; }
-.wtile.wide b, .wtile.big b { font-size: clamp(15px, 9cqw, 40px); }
-.wtile.wide span, .wtile.big span { font-size: clamp(11px, 5cqw, 17px); }
+.wtile b { font-size: clamp(13px, calc(var(--cell) * 0.15), 26px); font-weight: 700; letter-spacing: -0.03em; line-height: 1.05; overflow-wrap: anywhere; }
+.wtile span { margin-top: 0.35em; font-size: clamp(10px, calc(var(--cell) * 0.085), 14px); opacity: 0.85; }
 .wtile.blank { opacity: 0.38; }
 .wtile.fresh { animation: tile-in 0.7s cubic-bezier(0.3, 1.4, 0.5, 1) both; }
 .wtile.mine { box-shadow: 0 0 0 3px #fff, 0 0 40px rgba(239, 121, 138, 0.7); z-index: 1; }
