@@ -85,7 +85,11 @@
       bar.style.scale = `${p} 1`;
       // Cards move sideways inside a pinned box, so reveal them here as they slide in.
       if (strip.getBoundingClientRect().top < innerHeight * 0.5) {
-        for (const card of cards) if (card.getBoundingClientRect().left < innerWidth * 0.85) reveal(card);
+        for (const card of cards) {
+          if (card.getBoundingClientRect().left >= innerWidth * 0.85) continue;
+          reveal(card);
+          card.querySelectorAll('[data-reveal]').forEach(reveal);
+        }
       }
     };
     const measure = () => {

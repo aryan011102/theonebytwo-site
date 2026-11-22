@@ -132,7 +132,7 @@
     </div>
   </section>
 
-  <!-- 2–9. The app, screen by screen. On desktop this row scrolls sideways
+  <!-- 2–10. The app, screen by screen. On desktop this row scrolls sideways
        while the page scrolls down, like the App Store screenshot strip. -->
   <div class="strip" id="apps" data-strip>
   <div class="strip-sticky">
@@ -402,7 +402,51 @@
     </div>
   </section>
 
-  <!-- 8. See who viewed your profile -->
+  <!-- 8. Play games with them -->
+  <section class="feature light games" data-reveal>
+    <div class="games-top" aria-hidden="true">
+      <div class="games-art games-art-top">
+        <div class="g-phone">
+          <p class="g-msg g-asks">want to play something?</p>
+          <p class="g-msg g-says">always</p>
+          <p class="g-read">8:20 pm · Read</p>
+          <div class="g-wyr">
+            <p class="g-head"><i class="g-icon">&#xf55e;</i>Would you rather · your turn</p>
+            <p class="g-question">A holiday in the hills or by the beach?</p>
+            <div class="g-options"><span>Hills</span><span>Beach</span></div>
+          </div>
+          <div class="g-compose"><i class="g-icon">&#xf52c;</i><span>Message</span></div>
+        </div>
+        <i class="g-icon g-coin g-grid" style="--i:0">&#xf7bf;</i>
+        <i class="g-icon g-coin g-fire" style="--i:1">&#xf86b;</i>
+      </div>
+    </div>
+    <div class="copy games-copy">
+      <h2 class="display rv">Play <mark>games</mark> with them</h2>
+      <p class="games-aside rv" style="--rd:.1s">(but only on chat)</p>
+      <p class="sub rv" style="--rd:.16s">Choose questions or write your own<br> and never run out of conversation starters again ;)</p>
+    </div>
+    <!-- Revealed on its own: on a phone it is a screen below the top of the slide,
+         and FLAMES would have finished before anyone saw it. -->
+    <div class="games-art games-art-bottom" data-reveal aria-hidden="true">
+      <i class="g-icon g-coin g-bolt" style="--i:0">&#xf5ca;</i>
+      <div class="g-card g-flames">
+        <p class="g-head"><i class="g-icon">&#xf86b;</i>FLAMES · Love</p>
+        <p class="g-names">Ananya&ensp;+&ensp;Vikram</p>
+        <!-- --o is the order the game crosses them out in for these two names. -->
+        <div class="g-letters"><span style="--o:3">F</span><span class="g-kept">L</span><span style="--o:1">A</span><span style="--o:0">M</span><span style="--o:4">E</span><span style="--o:2">S</span></div>
+        <div class="g-result"><b>Love</b><span>Well, well, well.</span><em>See the working</em></div>
+      </div>
+      <div class="g-card g-movie">
+        <p class="g-head"><i class="g-icon">&#xf1f5;</i>Guess the movie · your turn</p>
+        <div class="g-clue"><span>🚂</span><span>🧑‍🤝‍🧑</span><span>🎒</span><span>😛</span></div>
+        <div class="g-options"><span>Wake Up Sid</span><span>Jab We Met</span><span>Love Aaj Kal</span><span>Socha Na Tha</span></div>
+      </div>
+      <i class="g-icon g-coin g-mind" style="--i:1">&#xf0893;</i>
+    </div>
+  </section>
+
+  <!-- 9. See who viewed your profile -->
   <section class="feature light" data-reveal>
     <div class="wrap grid">
       <div class="copy">
@@ -430,7 +474,7 @@
     </div>
   </section>
 
-  <!-- 9. Safety first -->
+  <!-- 10. Safety first -->
   <section class="feature dark safety" data-reveal>
     <div class="wrap grid flip">
       <div class="copy">
@@ -457,7 +501,7 @@
   </div>
   </div>
 
-  <!-- 10. Your data is safe & secure -->
+  <!-- 11. Your data is safe & secure -->
   <section class="stage-section black" data-reveal data-parallax>
     <!-- The floaters live in two zones beside (desktop) or around (mobile) the
          copy, so they can drift and lean without ever covering the words. -->
@@ -488,7 +532,7 @@
     </div>
   </section>
 
-  <!-- 11. The waitlist: a wall of everyone who joined, and the form on glass over it.
+  <!-- 12. The waitlist: a wall of everyone who joined, and the form on glass over it.
        data-api is the backend; on localhost ?api= points it at a local one. -->
   <section class="waitlist" id="waitlist" data-reveal data-waitlist data-api="https://api-production-6cf44.up.railway.app">
     <div class="wall" aria-hidden="true"></div>
