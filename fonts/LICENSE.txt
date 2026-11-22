@@ -1,0 +1,5 @@
+game-icons.otf is a subset of Material Icons by Google
+(https://github.com/google/material-design-icons), made from the copy that ships
+with Flutter, whose license file gives Creative Commons Attribution 4.0
+(https://creativecommons.org/licenses/by/4.0/). It holds only the icons on the
+games slide; nothing else was changed.
